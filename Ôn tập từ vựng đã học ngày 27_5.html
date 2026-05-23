@@ -1,0 +1,919 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ôn tập từ vựng — 27/5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f6f2ea;
+    --paper: #fbf8f1;
+    --ink: #1b1d1c;
+    --ink-soft: #3d423f;
+    --muted: #7a7a6f;
+    --rule: #d9d2c2;
+    --rule-soft: #e7e1d2;
+    --accent: #2f5d50;
+    --accent-soft: #cfdfd8;
+    --ok: #2f5d50;
+    --ok-bg: #d8e8de;
+    --bad: #a43a2b;
+    --bad-bg: #f0d6cf;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+  body {
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 24px;
+  }
+  .masthead .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 6px;
+  }
+  .masthead h1 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(24px, 4vw, 32px);
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .masthead .meta {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  /* Progress */
+  .progress-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .progress-row b {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .progress {
+    height: 3px;
+    background: var(--rule);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .progress > div {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 320ms cubic-bezier(.2,.7,.2,1);
+  }
+
+  /* Card */
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    border-radius: 6px;
+    padding: 40px 36px 32px;
+    position: relative;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 6px 0 0 6px;
+    opacity: 0.55;
+  }
+  .pos {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 10px;
+    font-weight: 500;
+  }
+  .meaning {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(22px, 3.5vw, 28px);
+    line-height: 1.25;
+    margin: 0 0 28px;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+
+  /* Hint + input */
+  .answer-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .hint-text {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .blank-wrap {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .blank {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-bottom: 1.5px solid var(--ink);
+    border-radius: 3px;
+    padding: 6px 10px;
+    min-width: 160px;
+    outline: none;
+    transition: border-color .15s, background .15s, box-shadow .15s;
+  }
+  .blank:focus {
+    border-color: var(--accent);
+    background: #fff;
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .blank::placeholder {
+    color: var(--muted);
+    font-weight: 400;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+  }
+  .blank.ok {
+    border-color: var(--ok);
+    background: var(--ok-bg);
+    color: var(--ok);
+  }
+  .blank.bad {
+    border-color: var(--bad);
+    background: var(--bad-bg);
+    color: var(--bad);
+  }
+  .blank-mark {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 18px;
+    font-size: 11px;
+    border-radius: 50%;
+    color: #fff;
+    font-family: "IBM Plex Mono", monospace;
+    opacity: 0;
+    transition: opacity .2s;
+  }
+  .blank-mark.show { opacity: 1; }
+  .blank-mark.ok { background: var(--ok); }
+  .blank-mark.bad { background: var(--bad); }
+
+  .helper {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0 0 0;
+    font-style: italic;
+    font-family: "Source Serif 4", Georgia, serif;
+  }
+
+  /* Actions */
+  .actions {
+    margin-top: 36px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule-soft);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .status-hint {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .btn {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 22px;
+    border-radius: 3px;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    cursor: pointer;
+    letter-spacing: 0.01em;
+    transition: transform .08s, background .15s, opacity .15s;
+  }
+  .btn:hover { background: #000; }
+  .btn:active { transform: translateY(1px); }
+  .btn[disabled] {
+    background: #b9bdb4;
+    border-color: #b9bdb4;
+    cursor: not-allowed;
+  }
+  .btn.ghost {
+    background: transparent;
+    color: var(--ink);
+  }
+  .btn.ghost:hover { background: rgba(0,0,0,0.04); }
+
+  /* Results */
+  .results-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 16px;
+    font-weight: 500;
+  }
+  .summary {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .score-big {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: clamp(48px, 8vw, 64px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .score-big .of {
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .summary-sub {
+    color: var(--ink-soft);
+    font-size: 15px;
+    font-family: "Source Serif 4", Georgia, serif;
+    font-style: italic;
+  }
+  .legend {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    margin: 22px 0 18px;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    flex-wrap: wrap;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 99px;
+    display: inline-block;
+  }
+  .dot.r { background: var(--ok); }
+  .dot.w { background: var(--bad); }
+  .legend .note {
+    margin-left: auto;
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: "Source Serif 4", Georgia, serif;
+    font-style: italic;
+    font-size: 13px;
+  }
+  .review-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 6px;
+  }
+  .review-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid var(--rule-soft);
+    border-radius: 4px;
+    background: #fff;
+    font-size: 14px;
+    font-family: "IBM Plex Mono", monospace;
+    color: var(--ink-soft);
+  }
+  .mark {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    border-radius: 99px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .mark.r { background: var(--ok); }
+  .mark.w { background: var(--bad); }
+  .review-list li .w-text {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .footer-actions {
+    margin-top: 28px;
+    display: flex;
+    gap: 12px;
+  }
+
+  .hidden { display: none !important; }
+
+  @media (max-width: 560px) {
+    .page { padding: 28px 16px 60px; }
+    .masthead { grid-template-columns: 1fr; }
+    .masthead .meta { text-align: left; }
+    .card { padding: 28px 22px 22px; }
+    .actions {
+      flex-direction: column-reverse;
+      align-items: stretch;
+    }
+    .actions .btn { width: 100%; }
+    .status-hint { text-align: center; }
+    .blank { min-width: 140px; width: 100%; }
+    .blank-wrap { width: 100%; }
+  }
+
+  /* Registration Modal */
+  #registration-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10001;
+  }
+  #registration-overlay.hidden {
+    display: none;
+  }
+  .registration-box {
+    background: var(--paper);
+    border-radius: 8px;
+    padding: 40px;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    border: 1px solid var(--rule);
+  }
+  .registration-box h2 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 28px;
+    margin: 0 0 8px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .registration-box p {
+    color: var(--ink-soft);
+    margin: 0 0 28px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .reg-form-group {
+    margin-bottom: 18px;
+  }
+  .reg-form-group label {
+    display: block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .reg-form-group input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    font-size: 15px;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+  }
+  .reg-form-group input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .reg-form-group input.error {
+    border-color: var(--bad);
+    background-color: var(--bad-bg);
+  }
+  .reg-form-group .error-message {
+    color: var(--bad);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    margin-top: 4px;
+    display: none;
+  }
+  .reg-form-group.invalid .error-message {
+    display: block;
+  }
+  .btn-start-test {
+    width: 100%;
+    padding: 10px 20px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 8px;
+  }
+  .btn-start-test:hover {
+    background: var(--ok);
+  }
+</style>
+</head>
+<body>
+  <!-- Registration Modal -->
+  <div id="registration-overlay">
+    <div class="registration-box">
+      <h2>Trước khi bắt đầu</h2>
+      <p>Vui lòng cung cấp thông tin của bạn để bắt đầu bài tập.</p>
+      <form id="registration-form" onsubmit="handleRegistration(event)">
+        <div class="reg-form-group">
+          <label for="student-name">Họ và tên *</label>
+          <input type="text" id="student-name" placeholder="Nhập họ và tên của bạn" required>
+          <div class="error-message">Vui lòng nhập tên</div>
+        </div>
+        <div class="reg-form-group">
+          <label for="student-class">Lớp / Khóa *</label>
+          <input type="text" id="student-class" placeholder="VD: Lớp 10A" required>
+          <div class="error-message">Vui lòng nhập lớp</div>
+        </div>
+        <button type="submit" class="btn-start-test">Bắt đầu bài tập</button>
+      </form>
+    </div>
+  </div>
+
+<template id="__bundler_thumbnail" data-bg-color="#f6f2ea">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#f6f2ea"/>
+    <rect x="240" y="200" width="720" height="400" rx="8" fill="#fbf8f1" stroke="#e7e1d2" stroke-width="2"/>
+    <rect x="240" y="200" width="4" height="400" fill="#2f5d50" opacity="0.55"/>
+    <rect x="290" y="240" width="120" height="14" rx="3" fill="#2f5d50" opacity="0.6"/>
+    <rect x="290" y="290" width="540" height="22" rx="3" fill="#1b1d1c" opacity="0.8"/>
+    <rect x="290" y="324" width="380" height="18" rx="3" fill="#3d423f" opacity="0.55"/>
+    <rect x="290" y="410" width="80" height="38" rx="3" fill="#fff" stroke="#d9d2c2" stroke-width="2"/>
+    <rect x="380" y="410" width="240" height="38" rx="3" fill="#fff" stroke="#1b1d1c" stroke-width="2"/>
+    <rect x="760" y="510" width="170" height="44" rx="3" fill="#1b1d1c"/>
+    <text x="845" y="540" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="500" fill="#fbf8f1">Tiếp theo →</text>
+  </svg>
+</template>
+
+<div class="page">
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">IELTS Vocabulary · Drill</p>
+      <h1>Ôn tập từ vựng — 27/5</h1>
+    </div>
+    <div class="meta">
+      Lesson · 27 / 05<br/>
+      46 từ vựng
+    </div>
+  </header>
+
+  <div class="progress-row">
+    <span id="counter">Từ 1 / 46</span>
+    <span id="progress-label">0% hoàn thành</span>
+  </div>
+  <div class="progress"><div id="bar"></div></div>
+
+  <!-- Quiz view -->
+  <section id="quiz" class="card">
+    <p class="pos" id="pos">(adj)</p>
+    <h2 class="meaning" id="meaning">…</h2>
+    <div class="answer-row" id="answer-row">
+      <span class="hint-text" id="prefix"></span>
+      <span class="blank-wrap">
+        <input
+          type="text"
+          id="blank"
+          class="blank"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          placeholder="…"
+        />
+        <span class="blank-mark" id="mark"></span>
+      </span>
+      <span class="hint-text" id="suffix"></span>
+    </div>
+    <p class="helper">Hoàn thành phần còn lại của từ, sau đó nhấn <b>Tiếp theo</b>.</p>
+
+    <div class="actions">
+      <span class="status-hint" id="status-hint">Chưa điền đáp án</span>
+      <button class="btn" id="next-btn" disabled>Tiếp theo →</button>
+    </div>
+  </section>
+
+  <!-- Results view -->
+  <section id="results" class="card hidden">
+    <p class="results-label">Kết quả</p>
+    <div class="summary">
+      <div class="score-big">
+        <span id="right-count">0</span><span class="of"> / <span id="total-count">0</span></span>
+      </div>
+      <div class="summary-sub" id="summary-sub"></div>
+    </div>
+    <div class="legend">
+      <span class="pill"><span class="dot r"></span>Đúng</span>
+      <span class="pill"><span class="dot w"></span>Sai</span>
+      <span class="note">Đáp án chính xác không được hiển thị.</span>
+    </div>
+    <ul class="review-list" id="review-list"></ul>
+    <div class="footer-actions">
+      <button class="btn" id="restart-btn">Làm lại</button>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Vocabulary — verbatim from "Ôn tập từ vựng đã học ngày 27/5"
+  // Each item: { pos, meaning, prefix, suffix, answer }
+  //   prefix  = visible text shown BEFORE the blank input
+  //   suffix  = visible text shown AFTER the blank input (may be "")
+  //   answer  = what the student types in the blank to complete the word/phrase
+  // The full intended phrase is (prefix + answer + (" " + suffix if suffix)).
+  // The full answer is never shown back to the student.
+  const ITEMS = [
+    { pos: "(n)",   meaning: "Ẩm thực",                                        prefix: "cui",        suffix: "",            answer: "sine" },
+    { pos: "(n)",   meaning: "bằng sáng chế / cấp bằng sáng chế",              prefix: "p",          suffix: "",            answer: "atent" },
+    { pos: "(n)",   meaning: "bê tông",                                        prefix: "con",        suffix: "",            answer: "crete" },
+    { pos: "(n)",   meaning: "Bộ đồ, bộ trang phục",                           prefix: "ou",         suffix: "",            answer: "tfit" },
+    { pos: "(n)",   meaning: "Cây thông",                                      prefix: "pi",         suffix: "",            answer: "ne" },
+    { pos: "(v)",   meaning: "chiết xuất / tách ra",                           prefix: "ex",         suffix: "",            answer: "tract" },
+    { pos: "(v)",   meaning: "có thể chi trả",                                 prefix: "af",         suffix: "",            answer: "ford" },
+    { pos: "(n)",   meaning: "Địa điểm du lịch",                               prefix: "attr",       suffix: "",            answer: "action" },
+    { pos: "(n)",   meaning: "Đồ gia dụng, đồ vật trong nhà",                  prefix: "Hou",        suffix: "items",       answer: "sehold" },
+    { pos: "(n)",   meaning: "động lực / sự khuyến khích",                     prefix: "inc",        suffix: "",            answer: "entive" },
+    { pos: "(n)",   meaning: "đường kính",                                     prefix: "dia",        suffix: "",            answer: "meter" },
+    { pos: "(adj)", meaning: "Gọn gàng sạch sẽ",                               prefix: "N",          suffix: "and clean",   answer: "eat" },
+    { pos: "(v)",   meaning: "Khám phá",                                       prefix: "ex",         suffix: "",            answer: "plore" },
+    { pos: "(n)",   meaning: "Khí hậu",                                        prefix: "cli",        suffix: "",            answer: "mate" },
+    { pos: "(n)",   meaning: "Khoảng trống, khoảng nghỉ",                      prefix: "g",          suffix: "",            answer: "ap" },
+    { pos: "(n)",   meaning: "khói (độc)",                                     prefix: "f",          suffix: "",            answer: "ume" },
+    { pos: "(v)",   meaning: "làm ô nhiễm / làm bẩn",                          prefix: "con",        suffix: "",            answer: "taminate" },
+    { pos: "(n)",   meaning: "Lịch trình",                                     prefix: "sch",        suffix: "",            answer: "edule" },
+    { pos: "(adj)", meaning: "Lợi ích",                                        prefix: "ben",        suffix: "",            answer: "eficial" },
+    { pos: "(n)",   meaning: "lốp xe",                                         prefix: "t",          suffix: "",            answer: "yre" },
+    { pos: "(n)",   meaning: "Món đồ phải có, không thể thiếu",                prefix: "Must-",      suffix: "item",        answer: "have" },
+    { pos: "(adv)", meaning: "Một cách khôn ngoan",                            prefix: "wis",        suffix: "",            answer: "ely" },
+    { pos: "(v)",   meaning: "nghĩ ra / tìm ra (ý tưởng, giải pháp)",          prefix: "",           suffix: "up with (sth)", answer: "come" },
+    { pos: "(n)",   meaning: "Ngoại hình",                                     prefix: "app",        suffix: "",            answer: "earance" },
+    { pos: "(adj)", meaning: "nhỏ gọn",                                        prefix: "com",        suffix: "",            answer: "pact" },
+    { pos: "(adj)", meaning: "Nổi tiếng vì điều gì đó",                        prefix: "Be well-",   suffix: "for sth",     answer: "known" },
+    { pos: "(adv)", meaning: "Nước ngoài",                                     prefix: "ove",        suffix: "",            answer: "rseas" },
+    { pos: "(n)",   meaning: "phần / đoạn",                                    prefix: "seg",        suffix: "",            answer: "ment" },
+    { pos: "(v)",   meaning: "Phản chiếu",                                     prefix: "ref",        suffix: "",            answer: "lect" },
+    { pos: "(n)",   meaning: "Phong cảnh",                                     prefix: "Sce",        suffix: "",            answer: "nery" },
+    { pos: "(adj)", meaning: "rất lớn / đáng kinh ngạc",                       prefix: "stag",       suffix: "",            answer: "gering" },
+    { pos: "(n)",   meaning: "Sự tấp nập và nhộn nhịp",                        prefix: "hus",        suffix: "and bustle",  answer: "tle" },
+    { pos: "(v)",   meaning: "Suy ngẫm, chiêm nghiệm",                         prefix: "ref",        suffix: "",            answer: "lect" },
+    { pos: "(v)",   meaning: "tạo ra / sinh ra",                               prefix: "gen",        suffix: "",            answer: "erate" },
+    { pos: "(n)",   meaning: "thành phần / bộ phận",                           prefix: "comp",       suffix: "",            answer: "onent" },
+    { pos: "(v)",   meaning: "thay đổi / điều chỉnh",                          prefix: "al",         suffix: "",            answer: "ter" },
+    { pos: "(adj)", meaning: "thiết yếu / không thể thiếu",                    prefix: "int",        suffix: "",            answer: "egral" },
+    { pos: "(v)",   meaning: "thiêu đốt",                                      prefix: "inci",       suffix: "",            answer: "nerate" },
+    { pos: "(n)",   meaning: "thử nghiệm",                                     prefix: "tr",         suffix: "",            answer: "ial" },
+    { pos: "(adj)", meaning: "tinh khiết",                                     prefix: "p",          suffix: "",            answer: "ure" },
+    { pos: "",      meaning: "Tọa lạc tại đâu đó",                             prefix: "Be loc",     suffix: "in",          answer: "ated" },
+    { pos: "(adj)", meaning: "triệt để / hoàn toàn mới",                       prefix: "rad",        suffix: "",            answer: "ical" },
+    { pos: "",      meaning: "trước khi (trang trọng hơn \u201Cbefore\u201D)", prefix: "pr",         suffix: "to",          answer: "ior" },
+    { pos: "(v)",   meaning: "vận hành / hoạt động",                           prefix: "op",         suffix: "",            answer: "erate" },
+    { pos: "(n)",   meaning: "vật liệu cách nhiệt / cách âm",                  prefix: "insu",       suffix: "",            answer: "lation" },
+    { pos: "(v)",   meaning: "vứt bỏ / thải bỏ",                               prefix: "dis",        suffix: "",            answer: "card" },
+  ];
+
+  function normalize(s) {
+    return String(s || "")
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, " ");
+  }
+
+  // --- State ---
+  let current = 0;
+  const total = ITEMS.length;
+  // answers[i] = { value, correct } once user has moved past it.
+  const answers = new Array(total).fill(null);
+
+  // --- DOM ---
+  const $pos = document.getElementById("pos");
+  const $meaning = document.getElementById("meaning");
+  const $prefix = document.getElementById("prefix");
+  const $suffix = document.getElementById("suffix");
+  const $blank = document.getElementById("blank");
+  const $mark = document.getElementById("mark");
+  const $next = document.getElementById("next-btn");
+  const $counter = document.getElementById("counter");
+  const $progress = document.getElementById("progress-label");
+  const $bar = document.getElementById("bar");
+  const $statusHint = document.getElementById("status-hint");
+  const $quiz = document.getElementById("quiz");
+  const $results = document.getElementById("results");
+
+  function render() {
+    const q = ITEMS[current];
+
+    if (q.pos) {
+      $pos.textContent = q.pos;
+      $pos.style.display = "";
+    } else {
+      $pos.style.display = "none";
+    }
+    $meaning.textContent = q.meaning;
+
+    // Prefix
+    if (q.prefix) {
+      $prefix.textContent = q.prefix;
+      $prefix.style.display = "";
+    } else {
+      $prefix.style.display = "none";
+    }
+
+    // Suffix
+    if (q.suffix) {
+      $suffix.textContent = q.suffix;
+      $suffix.style.display = "";
+    } else {
+      $suffix.style.display = "none";
+    }
+
+    // Placeholder: a row of underscores roughly matching answer length.
+    const len = q.answer.length;
+    const dashes = "_".repeat(Math.max(3, Math.min(12, len)));
+    $blank.placeholder = dashes;
+    $blank.value = "";
+    $blank.classList.remove("ok", "bad");
+    $mark.classList.remove("show", "ok", "bad");
+    $mark.textContent = "";
+
+    // Counter + progress
+    $counter.innerHTML = `Từ <b>${current + 1}</b> / ${total}`;
+    const pct = Math.round((current / total) * 100);
+    $bar.style.width = pct + "%";
+    $progress.textContent = pct + "% hoàn thành";
+
+    // Button text
+    const isLast = current === total - 1;
+    $next.textContent = isLast ? "Xem kết quả" : "Tiếp theo →";
+    $next.disabled = true;
+    $statusHint.textContent = "Chưa điền đáp án";
+
+    // Focus the input
+    setTimeout(() => $blank.focus(), 0);
+  }
+
+  $blank.addEventListener("input", () => {
+    $blank.classList.remove("ok", "bad");
+    $mark.classList.remove("show", "ok", "bad");
+    const hasValue = $blank.value.trim().length > 0;
+    $next.disabled = !hasValue;
+    $statusHint.textContent = hasValue ? "Sẵn sàng" : "Chưa điền đáp án";
+  });
+
+  $blank.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !$next.disabled) {
+      e.preventDefault();
+      goNext();
+    }
+  });
+
+  function evaluateCurrent() {
+    const q = ITEMS[current];
+    const userVal = normalize($blank.value);
+    const correct = normalize(q.answer) === userVal;
+    // Brief in-place feedback before advancing
+    $blank.classList.add(correct ? "ok" : "bad");
+    $mark.classList.add("show", correct ? "ok" : "bad");
+    $mark.textContent = correct ? "✓" : "✕";
+    answers[current] = { value: $blank.value, correct };
+    return correct;
+  }
+
+  function goNext() {
+    if (answers[current] == null) {
+      evaluateCurrent();
+    }
+    setTimeout(() => {
+      if (current < total - 1) {
+        current += 1;
+        render();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        showResults();
+      }
+    }, 380);
+  }
+
+  $next.addEventListener("click", () => {
+    if ($next.disabled) return;
+    $next.disabled = true;
+    goNext();
+  });
+
+  function showResults() {
+    $quiz.classList.add("hidden");
+    $results.classList.remove("hidden");
+    $bar.style.width = "100%";
+    $progress.textContent = "Hoàn thành";
+    $counter.innerHTML = `<b>${total}</b> / ${total}`;
+
+    let right = 0;
+    const list = document.getElementById("review-list");
+    list.innerHTML = "";
+    ITEMS.forEach((q, i) => {
+      const a = answers[i];
+      const ok = a && a.correct;
+      if (ok) right += 1;
+      const li = document.createElement("li");
+      li.innerHTML = `<span class="mark ${ok ? "r" : "w"}">${ok ? "✓" : "✕"}</span><span class="w-text"></span>`;
+      // Show ONLY the hint shape — never reveal the full word.
+      let label = (q.prefix || "") + "___";
+      if (q.suffix) label += " " + q.suffix;
+      li.querySelector(".w-text").textContent = label;
+      // Tooltip with meaning for context (still no answer revealed).
+      li.title = (q.pos ? q.pos + " " : "") + q.meaning;
+      list.appendChild(li);
+    });
+
+    document.getElementById("right-count").textContent = right;
+    document.getElementById("total-count").textContent = total;
+    const pct = Math.round((right / total) * 100);
+    let msg;
+    if (pct === 100) msg = "Hoàn hảo — bạn nhớ hết từ vựng!";
+    else if (pct >= 80) msg = "Rất tốt — chỉ cần ôn lại vài từ.";
+    else if (pct >= 60) msg = "Khá ổn — hãy xem lại các từ còn nhầm.";
+    else if (pct >= 40) msg = "Cần luyện tập thêm — thử lại nhé.";
+    else msg = "Đừng nản — học lại và làm lại bài này.";
+    document.getElementById("summary-sub").textContent = `${pct}% đúng. ${msg}`;
+  }
+
+  document.getElementById("restart-btn").addEventListener("click", () => {
+    current = 0;
+    for (let i = 0; i < total; i++) answers[i] = null;
+    $results.classList.add("hidden");
+    $quiz.classList.remove("hidden");
+    render();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  // Set initial total in counter
+  document.getElementById("total-count").textContent = total;
+  // Initial render
+  render();
+</script>
+
+  <script>
+    // Global student info
+    let studentName = '';
+    let studentClass = '';
+
+    // Registration handler
+    function handleRegistration(event) {
+      event.preventDefault();
+      const nameInput = document.getElementById('student-name');
+      const classInput = document.getElementById('student-class');
+      const nameGroup = nameInput.closest('.reg-form-group');
+      const classGroup = classInput.closest('.reg-form-group');
+
+      let valid = true;
+      if (!nameInput.value.trim()) {
+        nameGroup.classList.add('invalid');
+        nameInput.classList.add('error');
+        valid = false;
+      } else {
+        nameGroup.classList.remove('invalid');
+        nameInput.classList.remove('error');
+      }
+
+      if (!classInput.value.trim()) {
+        classGroup.classList.add('invalid');
+        classInput.classList.add('error');
+        valid = false;
+      } else {
+        classGroup.classList.remove('invalid');
+        classInput.classList.remove('error');
+      }
+
+      if (!valid) return;
+
+      studentName = nameInput.value.trim();
+      studentClass = classInput.value.trim();
+      document.getElementById('registration-overlay').classList.add('hidden');
+    }
+
+    // Google Form submission
+    async function submitToGoogleForm() {
+      const formId = '1FAIpQLSfH_ZWLGbyfh4VAr0a_uspre3Aw7fdbCBdFysAj9jBv1m9GIQ';
+      
+      let answersText = '';
+      let score = 0;
+      let total = 0;
+
+      // Collect all answers from the ITEMS array
+      if (typeof ITEMS !== 'undefined' && Array.isArray(ITEMS)) {
+        total = ITEMS.length;
+        ITEMS.forEach((item, idx) => {
+          const ans = answers[idx];
+          const val = (ans && ans.value) ? ans.value.trim() : '';
+          answersText += 'Q' + (idx + 1) + ': ' + val + '\n';
+          
+          if (ans && ans.correct) {
+            score++;
+          }
+        });
+      }
+
+      // Prepare form data with CORRECT ENTRY IDS
+      const formData = new FormData();
+      formData.append('entry.262618820', studentName);      // Name
+      formData.append('entry.678798145', studentClass);     // Class
+      formData.append('entry.568735604', answersText);      // Answers
+      formData.append('entry.2058527430', score);           // Score
+
+      try {
+        await fetch('https://docs.google.com/forms/d/e/' + formId + '/formResponse', {
+          method: 'POST',
+          mode: 'no-cors',
+          body: formData
+        });
+        console.log('✓ Results submitted: ' + studentName + ' (' + studentClass + ') - Score: ' + score + '/' + total);
+      } catch (err) {
+        console.error('Submission error:', err);
+      }
+    }
+
+    // Override showResults to add Google Form submission
+    const originalShowResults = showResults;
+    showResults = function() {
+      originalShowResults();
+      setTimeout(submitToGoogleForm, 800);
+    };
+  </script>
+</body>
+</html>
