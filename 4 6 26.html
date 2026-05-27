@@ -1,0 +1,1004 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ôn tập từ vựng — 4/6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #f6f2ea;
+    --paper: #fbf8f1;
+    --ink: #1b1d1c;
+    --ink-soft: #3d423f;
+    --muted: #7a7a6f;
+    --rule: #d9d2c2;
+    --rule-soft: #e7e1d2;
+    --accent: #2f5d50;
+    --accent-soft: #cfdfd8;
+    --ok: #2f5d50;
+    --ok-bg: #d8e8de;
+    --bad: #a43a2b;
+    --bad-bg: #f0d6cf;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+  body {
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  .masthead {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 24px;
+  }
+  .masthead .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 6px;
+  }
+  .masthead h1 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(24px, 4vw, 32px);
+    line-height: 1.1;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .masthead .meta {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  /* Progress */
+  .progress-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .progress-row b {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .progress {
+    height: 3px;
+    background: var(--rule);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .progress > div {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 320ms cubic-bezier(.2,.7,.2,1);
+  }
+
+  /* Card */
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    border-radius: 6px;
+    padding: 40px 36px 32px;
+    position: relative;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--accent);
+    border-radius: 6px 0 0 6px;
+    opacity: 0.55;
+  }
+  .pos {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 10px;
+    font-weight: 500;
+  }
+  .meaning {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(22px, 3.5vw, 28px);
+    line-height: 1.25;
+    margin: 0 0 28px;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+
+  /* Hint + input */
+  .answer-row {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+  .hint-text {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+  }
+  .blank-wrap {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+  }
+  .blank {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-bottom: 1.5px solid var(--ink);
+    border-radius: 3px;
+    padding: 6px 10px;
+    min-width: 160px;
+    outline: none;
+    transition: border-color .15s, background .15s, box-shadow .15s;
+  }
+  .blank:focus {
+    border-color: var(--accent);
+    background: #fff;
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .blank::placeholder {
+    color: var(--muted);
+    font-weight: 400;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+  }
+  .blank.ok {
+    border-color: var(--ok);
+    background: var(--ok-bg);
+    color: var(--ok);
+  }
+  .blank.bad {
+    border-color: var(--bad);
+    background: var(--bad-bg);
+    color: var(--bad);
+  }
+  .blank-mark {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    line-height: 18px;
+    font-size: 11px;
+    border-radius: 50%;
+    color: #fff;
+    font-family: "IBM Plex Mono", monospace;
+    opacity: 0;
+    transition: opacity .2s;
+  }
+  .blank-mark.show { opacity: 1; }
+  .blank-mark.ok { background: var(--ok); }
+  .blank-mark.bad { background: var(--bad); }
+
+  .helper {
+    font-size: 13px;
+    color: var(--muted);
+    margin: 0 0 0;
+    font-style: italic;
+    font-family: "Source Serif 4", Georgia, serif;
+  }
+
+  /* Actions */
+  .actions {
+    margin-top: 36px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule-soft);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .status-hint {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .btn {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 22px;
+    border-radius: 3px;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    cursor: pointer;
+    letter-spacing: 0.01em;
+    transition: transform .08s, background .15s, opacity .15s;
+  }
+  .btn:hover { background: #000; }
+  .btn:active { transform: translateY(1px); }
+  .btn[disabled] {
+    background: #b9bdb4;
+    border-color: #b9bdb4;
+    cursor: not-allowed;
+  }
+  .btn.ghost {
+    background: transparent;
+    color: var(--ink);
+  }
+  .btn.ghost:hover { background: rgba(0,0,0,0.04); }
+
+  /* Results */
+  .results-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 16px;
+    font-weight: 500;
+  }
+  .summary {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .score-big {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: clamp(48px, 8vw, 64px);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .score-big .of {
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .summary-sub {
+    color: var(--ink-soft);
+    font-size: 15px;
+    font-family: "Source Serif 4", Georgia, serif;
+    font-style: italic;
+  }
+  .legend {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    margin: 22px 0 18px;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: "IBM Plex Mono", monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    flex-wrap: wrap;
+  }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 99px;
+    display: inline-block;
+  }
+  .dot.r { background: var(--ok); }
+  .dot.w { background: var(--bad); }
+  .legend .note {
+    margin-left: auto;
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: "Source Serif 4", Georgia, serif;
+    font-style: italic;
+    font-size: 13px;
+  }
+  .review-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 6px;
+  }
+  .review-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid var(--rule-soft);
+    border-radius: 4px;
+    background: #fff;
+    font-size: 14px;
+    font-family: "IBM Plex Mono", monospace;
+    color: var(--ink-soft);
+  }
+  .mark {
+    width: 20px;
+    height: 20px;
+    flex: none;
+    border-radius: 99px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+  }
+  .mark.r { background: var(--ok); }
+  .mark.w { background: var(--bad); }
+  .review-list li .w-text {
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .footer-actions {
+    margin-top: 28px;
+    display: flex;
+    gap: 12px;
+  }
+
+  .hidden { display: none !important; }
+
+  @media (max-width: 560px) {
+    .page { padding: 28px 16px 60px; }
+    .masthead { grid-template-columns: 1fr; }
+    .masthead .meta { text-align: left; }
+    .card { padding: 28px 22px 22px; }
+    .actions {
+      flex-direction: column-reverse;
+      align-items: stretch;
+    }
+    .actions .btn { width: 100%; }
+    .status-hint { text-align: center; }
+    .blank { min-width: 140px; width: 100%; }
+    .blank-wrap { width: 100%; }
+  }
+  /* === Student-info gate (shown before the test starts) === */
+  .gate-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(20,20,20,.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 20px;
+  }
+  .gate-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 32px 32px 28px;
+    max-width: 440px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+  }
+  .gate-card .gate-eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ok);
+    margin: 0 0 8px;
+  }
+  .gate-card h2 {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 500;
+    font-size: 24px;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .gate-card .gate-sub {
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 15px;
+    color: var(--muted);
+    margin: 0 0 22px;
+  }
+  .gate-field { margin-bottom: 16px; }
+  .gate-field label {
+    display: block;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .gate-field label .req { color: var(--bad); margin-left: 2px; }
+  .gate-field input {
+    width: 100%;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-bottom: 1.5px solid var(--ink);
+    border-radius: 3px;
+    padding: 9px 12px;
+    outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .gate-field input:focus {
+    border-color: var(--ok);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .gate-field input.invalid {
+    border-color: var(--bad);
+    background: var(--bad-bg);
+  }
+  .gate-error {
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 13px;
+    color: var(--bad);
+    margin: 0 0 14px;
+    min-height: 18px;
+  }
+  .gate-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 6px;
+  }
+  /* Identity badge added to the masthead after the gate closes */
+  .student-tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+  .student-tag b { color: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- Student-info gate: must enter Name + Class before starting the test -->
+<div class="gate-overlay" id="gate-overlay" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+  <div class="gate-card">
+    <p class="gate-eyebrow">Before you begin</p>
+    <h2 id="gate-title">Student information</h2>
+    <p class="gate-sub">Please enter your name and class to start the practice.</p>
+    <div class="gate-field">
+      <label for="gate-name">Name<span class="req">*</span></label>
+      <input type="text" id="gate-name" autocomplete="name" spellcheck="false" />
+    </div>
+    <div class="gate-field">
+      <label for="gate-class">Class<span class="req">*</span></label>
+      <input type="text" id="gate-class" autocomplete="off" spellcheck="false" />
+    </div>
+    <p class="gate-error" id="gate-error"></p>
+    <div class="gate-actions">
+      <button class="btn" id="gate-start">Start practice</button>
+    </div>
+  </div>
+</div>
+
+<template id="__bundler_thumbnail" data-bg-color="#f6f2ea">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#f6f2ea"/>
+    <rect x="240" y="200" width="720" height="400" rx="8" fill="#fbf8f1" stroke="#e7e1d2" stroke-width="2"/>
+    <rect x="240" y="200" width="4" height="400" fill="#2f5d50" opacity="0.55"/>
+    <rect x="290" y="240" width="120" height="14" rx="3" fill="#2f5d50" opacity="0.6"/>
+    <rect x="290" y="290" width="540" height="22" rx="3" fill="#1b1d1c" opacity="0.8"/>
+    <rect x="290" y="324" width="380" height="18" rx="3" fill="#3d423f" opacity="0.55"/>
+    <rect x="290" y="410" width="80" height="38" rx="3" fill="#fff" stroke="#d9d2c2" stroke-width="2"/>
+    <rect x="380" y="410" width="240" height="38" rx="3" fill="#fff" stroke="#1b1d1c" stroke-width="2"/>
+    <rect x="760" y="510" width="170" height="44" rx="3" fill="#1b1d1c"/>
+    <text x="845" y="540" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="500" fill="#fbf8f1">Tiếp theo →</text>
+  </svg>
+</template>
+
+<div class="page">
+  <header class="masthead">
+    <div>
+      <p class="eyebrow">IELTS Vocabulary · Drill</p>
+      <h1>Ôn tập từ vựng — 4/6</h1>
+    </div>
+    <div class="meta">
+      Lesson · 4 / 06<br/>
+      76 từ vựng
+    </div>
+  </header>
+
+  <div class="progress-row">
+    <span id="counter">Từ 1 / 76</span>
+    <span id="progress-label">0% hoàn thành</span>
+  </div>
+  <div class="progress"><div id="bar"></div></div>
+
+  <!-- Quiz view -->
+  <section id="quiz" class="card">
+    <p class="pos" id="pos">(v)</p>
+    <h2 class="meaning" id="meaning">…</h2>
+    <div class="answer-row" id="answer-row">
+      <span class="hint-text" id="prefix"></span>
+      <span class="blank-wrap">
+        <input
+          type="text"
+          id="blank"
+          class="blank"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          placeholder="…"
+        />
+        <span class="blank-mark" id="mark"></span>
+      </span>
+      <span class="hint-text" id="suffix"></span>
+    </div>
+    <p class="helper">Hoàn thành phần còn lại của từ, sau đó nhấn <b>Tiếp theo</b>.</p>
+
+    <div class="actions">
+      <span class="status-hint" id="status-hint">Chưa điền đáp án</span>
+      <button class="btn" id="next-btn" disabled>Tiếp theo →</button>
+    </div>
+  </section>
+
+  <!-- Results view -->
+  <section id="results" class="card hidden">
+    <p class="results-label">Kết quả</p>
+    <div class="summary">
+      <div class="score-big">
+        <span id="right-count">0</span><span class="of"> / <span id="total-count">0</span></span>
+      </div>
+      <div class="summary-sub" id="summary-sub"></div>
+    </div>
+    <div class="legend">
+      <span class="pill"><span class="dot r"></span>Đúng</span>
+      <span class="pill"><span class="dot w"></span>Sai</span>
+      <span class="note">Đáp án chính xác không được hiển thị.</span>
+    </div>
+    <ul class="review-list" id="review-list"></ul>
+    <div class="footer-actions">
+      <button class="btn" id="restart-btn">Làm lại</button>
+    </div>
+  </section>
+</div>
+
+<script>
+  // Vocabulary — verbatim from "Ôn tập từ vựng đã học ngày 4/6"
+  // Each item: { pos, meaning, prefix, suffix, answer }
+  //   prefix  = visible text shown BEFORE the blank input
+  //   suffix  = visible text shown AFTER the blank input (may be "")
+  //   answer  = what the student types in the blank to complete the word/phrase
+  // The full answer is never displayed back to the student.
+  const ITEMS = [
+    { pos: "(n)",   meaning: "bảo trì",                                              prefix: "mainten",       suffix: "",            answer: "ance" },
+    { pos: "(n)",   meaning: "Bầu không khí",                                        prefix: "atmos",         suffix: "",            answer: "phere" },
+    { pos: "",      meaning: "Bên cạnh",                                             prefix: "along",         suffix: "",            answer: "side" },
+    { pos: "(n)",   meaning: "Biểu cảm khuôn mặt",                                   prefix: "fa",            suffix: "expressions", answer: "cial" },
+    { pos: "(n)",   meaning: "Cảm xúc",                                              prefix: "em",            suffix: "",            answer: "otion" },
+    { pos: "(n)",   meaning: "cành cây",                                             prefix: "bra",           suffix: "",            answer: "nch" },
+    { pos: "(adj)", meaning: "Chân thành",                                           prefix: "gen",           suffix: "",            answer: "uine" },
+    { pos: "(n)",   meaning: "Chất lượng không khí",                                 prefix: "air qua",       suffix: "",            answer: "lity" },
+    { pos: "(v)",   meaning: "chỉ định",                                             prefix: "desig",         suffix: "",            answer: "nate" },
+    { pos: "(v)",   meaning: "cho phép",                                             prefix: "per",           suffix: "",            answer: "mit" },
+    { pos: "(v)",   meaning: "chú ý tìm kiếm",                                       prefix: "keep an",       suffix: "out",         answer: "eye" },
+    { pos: "(n)",   meaning: "chuyến đi chơi, dã ngoại cùng gia đình",               prefix: "family ou",     suffix: "",            answer: "tings" },
+    { pos: "(adj)", meaning: "Có giá trị, quý giá",                                  prefix: "valu",          suffix: "",            answer: "able" },
+    { pos: "(v)",   meaning: "Có khoảng thời gian vui vẻ, vui chơi",                 prefix: "have",          suffix: "",            answer: "fun" },
+    { pos: "(adj)", meaning: "Có ý nghĩa",                                           prefix: "mean",          suffix: "",            answer: "ingful" },
+    { pos: "(v)",   meaning: "Cởi mở đón nhận",                                      prefix: "Be",            suffix: "to sth",      answer: "open" },
+    { pos: "(v)",   meaning: "cúi xuống",                                            prefix: "be",            suffix: "",            answer: "nd" },
+    { pos: "(adj)", meaning: "Đa dạng",                                              prefix: "div",           suffix: "",            answer: "erse" },
+    { pos: "(n)",   meaning: "Đạp xe",                                               prefix: "cy",            suffix: "",            answer: "cling" },
+    { pos: "(n)",   meaning: "đấu trường, sân biểu diễn",                            prefix: "are",           suffix: "",            answer: "na" },
+    { pos: "(adj)", meaning: "Dày đặc",                                              prefix: "den",           suffix: "",            answer: "se" },
+    { pos: "(n)",   meaning: "Đi bộ đường dài, leo núi",                             prefix: "hi",            suffix: "",            answer: "king" },
+    { pos: "(v)",   meaning: "Đi dạo",                                               prefix: "t",             suffix: "a walk",      answer: "ake" },
+    { pos: "(n)",   meaning: "địa điểm",                                             prefix: "si",            suffix: "",            answer: "te" },
+    { pos: "(n)",   meaning: "Động thực vật hoang dã",                               prefix: "wild",          suffix: "",            answer: "life" },
+    { pos: "(v)",   meaning: "Dựa vào",                                              prefix: "Rely",          suffix: "sth",         answer: "on" },
+    { pos: "(adj)", meaning: "Được bao quanh",                                       prefix: "sur",           suffix: "",            answer: "rounded" },
+    { pos: "(v)",   meaning: "Duy trì",                                              prefix: "main",          suffix: "",            answer: "tain" },
+    { pos: "(v)",   meaning: "Giữ kết nối",                                          prefix: "stay con",      suffix: "",            answer: "nected" },
+    { pos: "(v)",   meaning: "Giữ liên lạc với",                                     prefix: "keep in con",   suffix: "with sb",     answer: "tact" },
+    { pos: "(v)",   meaning: "Giữ liên lạc với",                                     prefix: "keep in",       suffix: "with",        answer: "touch" },
+    { pos: "(n)",   meaning: "hàng rào",                                             prefix: "fe",            suffix: "",            answer: "nce" },
+    { pos: "(adj)", meaning: "hấp dẫn, thú vị",                                      prefix: "fasci",         suffix: "",            answer: "nating" },
+    { pos: "(v)",   meaning: "hiểu, diễn giải",                                      prefix: "inter",         suffix: "",            answer: "pret" },
+    { pos: "(n)",   meaning: "hội trường",                                           prefix: "h",             suffix: "",            answer: "all" },
+    { pos: "(adj)", meaning: "ít vận động",                                          prefix: "seden",         suffix: "",            answer: "tary" },
+    { pos: "(n)",   meaning: "Không gian xanh",                                      prefix: "g",             suffix: "spaces",      answer: "reen" },
+    { pos: "(n)",   meaning: "khu nuôi nhốt",                                        prefix: "enclo",         suffix: "",            answer: "sure" },
+    { pos: "(v)",   meaning: "kiềm chế, tránh",                                      prefix: "ref",           suffix: "",            answer: "rain" },
+    { pos: "(n)",   meaning: "Lời khuyên",                                           prefix: "ad",            suffix: "",            answer: "vice" },
+    { pos: "(n)",   meaning: "lửa trại",                                             prefix: "bon",           suffix: "",            answer: "fire" },
+    { pos: "(n)",   meaning: "Mối quan hệ ngoài đời thực",                           prefix: "",              suffix: "relationships", answer: "real-life" },
+    { pos: "(adj)", meaning: "Năng động",                                            prefix: "ener",          suffix: "",            answer: "getic" },
+    { pos: "(adj)", meaning: "ngắn gọn",                                             prefix: "br",            suffix: "",            answer: "ief" },
+    { pos: "(adv)", meaning: "Ngay lập tức",                                         prefix: "ins",           suffix: "",            answer: "tantly" },
+    { pos: "(adj)", meaning: "Ngoài đời, trực tiếp",                                 prefix: "face-",         suffix: "",            answer: "to-face", prefixJoin: "" },
+    { pos: "(n)",   meaning: "ngữ cơ thể",                                           prefix: "",              suffix: "language",    answer: "body" },
+    { pos: "(adv)", meaning: "nhìn chung",                                           prefix: "gene",          suffix: "",            answer: "rally" },
+    { pos: "(n)",   meaning: "nhìn thấy",                                            prefix: "sp",            suffix: "",            answer: "ot" },
+    { pos: "(n)",   meaning: "nơi cư trú",                                           prefix: "resi",          suffix: "",            answer: "dence" },
+    { pos: "(n)",   meaning: "Phong cảnh",                                           prefix: "sce",           suffix: "",            answer: "nery" },
+    { pos: "",      meaning: "Sẵn lòng",                                             prefix: "Be wi",         suffix: "to do sth",   answer: "lling" },
+    { pos: "(n)",   meaning: "sinh vật",                                             prefix: "crea",          suffix: "",            answer: "ture" },
+    { pos: "(n)",   meaning: "Sở thích, sự quan tâm",                                prefix: "inte",          suffix: "",            answer: "rest" },
+    { pos: "(n)",   meaning: "sự hung hăng",                                         prefix: "aggres",        suffix: "",            answer: "sion" },
+    { pos: "(n)",   meaning: "sự thôi thúc",                                         prefix: "ur",            suffix: "",            answer: "ge" },
+    { pos: "(n)",   meaning: "Sự tương tác",                                         prefix: "inter",         suffix: "",            answer: "action" },
+    { pos: "(adv)", meaning: "tạm thời",                                             prefix: "tempo",         suffix: "",            answer: "rarily" },
+    { pos: "(adj)", meaning: "tham ăn, tham lam",                                    prefix: "gre",           suffix: "",            answer: "edy" },
+    { pos: "(adj)", meaning: "Thân thiết, gần gũi",                                  prefix: "clo",           suffix: "",            answer: "se" },
+    { pos: "(adv)", meaning: "Thỉnh thoảng",                                         prefix: "occa",          suffix: "",            answer: "sionally" },
+    { pos: "(v)",   meaning: "Thư giãn đầu óc, giải tỏa tâm trí",                    prefix: "c",             suffix: "my mind",     answer: "lear" },
+    { pos: "(adj)", meaning: "thuộc thực vật học",                                   prefix: "bota",          suffix: "",            answer: "nic" },
+    { pos: "(n)",   meaning: "tiếp xúc cơ thể",                                      prefix: "phy",           suffix: "contact",     answer: "sical" },
+    { pos: "(n)",   meaning: "Tính cách",                                            prefix: "per",           suffix: "",            answer: "sonality" },
+    { pos: "(adj)", meaning: "Tốt bụng",                                             prefix: "W",             suffix: "-hearted",    answer: "arm", suffixJoin: "" },
+    { pos: "(adv)", meaning: "Trực tiếp",                                            prefix: "in pe",         suffix: "",            answer: "rson" },
+    { pos: "(n)",   meaning: "Trường tiểu học",                                      prefix: "pri",           suffix: "school",      answer: "mary" },
+    { pos: "(n)",   meaning: "tư thế",                                               prefix: "pos",           suffix: "",            answer: "ture" },
+    { pos: "(n)",   meaning: "túi bụng",                                             prefix: "po",            suffix: "",            answer: "uch" },
+    { pos: "(adj)", meaning: "Tương tự",                                             prefix: "si",            suffix: "",            answer: "milar" },
+    { pos: "(adj)", meaning: "tuyệt vời",                                            prefix: "fant",          suffix: "",            answer: "astic" },
+    { pos: "(n)",   meaning: "Vườn quốc gia",                                        prefix: "Na",            suffix: "Park",        answer: "tional" },
+    { pos: "(n)",   meaning: "Xe cộ đông đúc",                                       prefix: "h",             suffix: "traffic",     answer: "eavy" },
+    { pos: "(v)",   meaning: "Xem rằng, cho rằng",                                   prefix: "con",           suffix: "",            answer: "sider" },
+    { pos: "(adj)", meaning: "Yên bình",                                             prefix: "pea",           suffix: "",            answer: "ceful" },
+  ];
+
+  function normalize(s) {
+    return String(s || "")
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, " ");
+  }
+
+  // --- State ---
+  let current = 0;
+  const total = ITEMS.length;
+  const answers = new Array(total).fill(null);
+
+  // --- DOM ---
+  const $pos = document.getElementById("pos");
+  const $meaning = document.getElementById("meaning");
+  const $prefix = document.getElementById("prefix");
+  const $suffix = document.getElementById("suffix");
+  const $answerRow = document.getElementById("answer-row");
+  const $blank = document.getElementById("blank");
+  const $mark = document.getElementById("mark");
+  const $next = document.getElementById("next-btn");
+  const $counter = document.getElementById("counter");
+  const $progress = document.getElementById("progress-label");
+  const $bar = document.getElementById("bar");
+  const $statusHint = document.getElementById("status-hint");
+  const $quiz = document.getElementById("quiz");
+  const $results = document.getElementById("results");
+
+  function render() {
+    const q = ITEMS[current];
+
+    if (q.pos) {
+      $pos.textContent = q.pos;
+      $pos.style.display = "";
+    } else {
+      $pos.style.display = "none";
+    }
+    $meaning.textContent = q.meaning;
+
+    // Prefix
+    if (q.prefix) {
+      $prefix.textContent = q.prefix;
+      $prefix.style.display = "";
+    } else {
+      $prefix.style.display = "none";
+    }
+
+    // Suffix — adjacent (like "-the-board") joins with no gap; otherwise a space gap.
+    // Same idea on the prefix side (e.g. "face-" joins the blank with no gap).
+    const tightJoin = (q.suffixJoin === "") || (q.prefixJoin === "");
+    if (q.suffix) {
+      $suffix.textContent = q.suffix;
+      $suffix.style.display = "";
+      $answerRow.style.gap = tightJoin ? "0px" : "4px";
+    } else {
+      $suffix.style.display = "none";
+      $answerRow.style.gap = tightJoin ? "0px" : "4px";
+    }
+
+    // Placeholder: row of underscores roughly matching answer length.
+    const len = q.answer.length;
+    const dashes = "_".repeat(Math.max(3, Math.min(12, len)));
+    $blank.placeholder = dashes;
+    $blank.value = "";
+    $blank.classList.remove("ok", "bad");
+    $mark.classList.remove("show", "ok", "bad");
+    $mark.textContent = "";
+
+    // Counter + progress
+    $counter.innerHTML = `Từ <b>${current + 1}</b> / ${total}`;
+    const pct = Math.round((current / total) * 100);
+    $bar.style.width = pct + "%";
+    $progress.textContent = pct + "% hoàn thành";
+
+    // Button text
+    const isLast = current === total - 1;
+    $next.textContent = isLast ? "Xem kết quả" : "Tiếp theo →";
+    $next.disabled = true;
+    $statusHint.textContent = "Chưa điền đáp án";
+
+    setTimeout(() => $blank.focus(), 0);
+  }
+
+  $blank.addEventListener("input", () => {
+    $blank.classList.remove("ok", "bad");
+    $mark.classList.remove("show", "ok", "bad");
+    const hasValue = $blank.value.trim().length > 0;
+    $next.disabled = !hasValue;
+    $statusHint.textContent = hasValue ? "Sẵn sàng" : "Chưa điền đáp án";
+  });
+
+  $blank.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !$next.disabled) {
+      e.preventDefault();
+      goNext();
+    }
+  });
+
+  function evaluateCurrent() {
+    const q = ITEMS[current];
+    const userVal = normalize($blank.value);
+    const correct = normalize(q.answer) === userVal;
+    $blank.classList.add(correct ? "ok" : "bad");
+    $mark.classList.add("show", correct ? "ok" : "bad");
+    $mark.textContent = correct ? "✓" : "✕";
+    answers[current] = { value: $blank.value, correct };
+    return correct;
+  }
+
+  function goNext() {
+    if (answers[current] == null) {
+      evaluateCurrent();
+    }
+    setTimeout(() => {
+      if (current < total - 1) {
+        current += 1;
+        render();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        showResults();
+      }
+    }, 380);
+  }
+
+  $next.addEventListener("click", () => {
+    if ($next.disabled) return;
+    $next.disabled = true;
+    goNext();
+  });
+
+  function showResults() {
+    $quiz.classList.add("hidden");
+    $results.classList.remove("hidden");
+    $bar.style.width = "100%";
+    $progress.textContent = "Hoàn thành";
+    $counter.innerHTML = `<b>${total}</b> / ${total}`;
+
+    let right = 0;
+    const list = document.getElementById("review-list");
+    list.innerHTML = "";
+    ITEMS.forEach((q, i) => {
+      const a = answers[i];
+      const ok = a && a.correct;
+      if (ok) right += 1;
+      const li = document.createElement("li");
+      li.innerHTML = `<span class="mark ${ok ? "r" : "w"}">${ok ? "✓" : "✕"}</span><span class="w-text"></span>`;
+      // Show ONLY the hint shape — never reveal the full word.
+      let label = (q.prefix || "") + "___";
+      if (q.suffix) {
+        label += (q.suffixJoin === "") ? q.suffix : (" " + q.suffix);
+      }
+      li.querySelector(".w-text").textContent = label;
+      li.title = (q.pos ? q.pos + " " : "") + q.meaning;
+      list.appendChild(li);
+    });
+
+    document.getElementById("right-count").textContent = right;
+    document.getElementById("total-count").textContent = total;
+    const pct = Math.round((right / total) * 100);
+    let msg;
+    if (pct === 100) msg = "Hoàn hảo — bạn nhớ hết từ vựng!";
+    else if (pct >= 80) msg = "Rất tốt — chỉ cần ôn lại vài từ.";
+    else if (pct >= 60) msg = "Khá ổn — hãy xem lại các từ còn nhầm.";
+    else if (pct >= 40) msg = "Cần luyện tập thêm — thử lại nhé.";
+    else msg = "Đừng nản — học lại và làm lại bài này.";
+    document.getElementById("summary-sub").textContent = `${pct}% đúng. ${msg}`;
+  }
+
+  document.getElementById("restart-btn").addEventListener("click", () => {
+    current = 0;
+    for (let i = 0; i < total; i++) answers[i] = null;
+    $results.classList.add("hidden");
+    $quiz.classList.remove("hidden");
+    render();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  document.getElementById("total-count").textContent = total;
+  render();
+
+  /* ====================================================================
+     Student-info gate + Google Form submission
+     ==================================================================== */
+  const GOOGLE_FORM = {
+    formId: "1FAIpQLSehNFOodKprvXWDfBezG8Y_iH_Ec82z5DnaFEkMOJe8nEpXPA",
+    fields: {
+      name:    "entry.77040290",
+      class:   "entry.535763652",
+      answers: "entry.1869973656",
+      score:   "entry.210986254",
+    },
+  };
+
+  const student = { name: "", class: "" };
+
+  // Gate elements
+  const gateOverlay = document.getElementById("gate-overlay");
+  const gateName    = document.getElementById("gate-name");
+  const gateClass   = document.getElementById("gate-class");
+  const gateError   = document.getElementById("gate-error");
+  const gateStart   = document.getElementById("gate-start");
+
+  function startPractice(){
+    const nameVal  = gateName.value.trim();
+    const classVal = gateClass.value.trim();
+    gateName.classList.toggle("invalid", !nameVal);
+    gateClass.classList.toggle("invalid", !classVal);
+    if (!nameVal || !classVal){
+      gateError.textContent = "Please enter both your name and your class.";
+      (nameVal ? gateClass : gateName).focus();
+      return;
+    }
+    student.name  = nameVal;
+    student.class = classVal;
+    gateError.textContent = "";
+    gateOverlay.style.display = "none";
+
+    // Show identity badge in the masthead
+    const meta = document.querySelector(".masthead .meta");
+    if (meta){
+      const tag = document.createElement("div");
+      tag.className = "student-tag";
+      tag.innerHTML = `Học sinh · <b></b><br/>Lớp · <b></b>`;
+      tag.querySelectorAll("b")[0].textContent = student.name;
+      tag.querySelectorAll("b")[1].textContent = student.class;
+      meta.appendChild(tag);
+    }
+
+    // Refocus the blank input now that the gate is gone
+    setTimeout(() => $blank.focus(), 0);
+  }
+
+  gateStart.addEventListener("click", startPractice);
+  [gateName, gateClass].forEach(el => {
+    el.addEventListener("keydown", e => {
+      if (e.key === "Enter"){ e.preventDefault(); startPractice(); }
+    });
+    el.addEventListener("input", () => {
+      el.classList.remove("invalid");
+      gateError.textContent = "";
+    });
+  });
+  setTimeout(() => gateName.focus(), 50);
+
+  // Build a transcript: each item's hint shape, the student's typed input,
+  // and ✓/✕. Correct answers are NEVER included — the page itself never
+  // shows them to the student, so neither does the form submission.
+  function collectAnswersTranscript(){
+    const lines = [];
+    ITEMS.forEach((q, i) => {
+      const a = answers[i];
+      const status = !a ? "·" : (a.correct ? "✓" : "✕");
+      let label = (q.prefix || "") + "___";
+      if (q.suffix){
+        label += (q.suffixJoin === "") ? q.suffix : (" " + q.suffix);
+      }
+      const pos = q.pos ? q.pos + " " : "";
+      const typed = a && a.value ? a.value : "(blank)";
+      lines.push(`${String(i + 1).padStart(2, "0")}. [${status}] ${pos}${q.meaning}`);
+      lines.push(`     ${label}   →   ${typed}`);
+    });
+    return lines.join("\n");
+  }
+
+  let hasSubmitted = false;
+  function submitToGoogleForm(){
+    if (hasSubmitted) return;
+    hasSubmitted = true;
+
+    const right = parseInt(document.getElementById("right-count").textContent, 10) || 0;
+    const url = `https://docs.google.com/forms/d/e/${GOOGLE_FORM.formId}/formResponse`;
+    const payload = {
+      [GOOGLE_FORM.fields.name]:    student.name,
+      [GOOGLE_FORM.fields.class]:   student.class,
+      [GOOGLE_FORM.fields.answers]: collectAnswersTranscript(),
+      [GOOGLE_FORM.fields.score]:   `${right} / ${total}`,
+    };
+
+    // Hidden-iframe form POST: the most reliable way to write to Google Forms
+    // from a webpage. The response loads into the invisible iframe, bypassing CORS.
+    let iframe = document.getElementById("gf-sink");
+    if (!iframe){
+      iframe = document.createElement("iframe");
+      iframe.name = "gf-sink";
+      iframe.id   = "gf-sink";
+      iframe.style.display = "none";
+      document.body.appendChild(iframe);
+    }
+    const form = document.createElement("form");
+    form.action = url;
+    form.method = "POST";
+    form.target = "gf-sink";
+    form.style.display = "none";
+    Object.entries(payload).forEach(([k, v]) => {
+      const inp = document.createElement("input");
+      inp.type  = "hidden";
+      inp.name  = k;
+      inp.value = v;
+      form.appendChild(inp);
+    });
+    document.body.appendChild(form);
+    form.submit();
+    setTimeout(() => form.remove(), 2000);
+  }
+
+  // Hook into the existing flow by observing #results becoming visible.
+  // showResults() removes the "hidden" class from #results on every completion
+  // path (clicking "Xem kết quả" on the last item). After it fires we wait
+  // one frame for #right-count to be filled in, then send.
+  const resultsObserver = new MutationObserver(() => {
+    if (!$results.classList.contains("hidden") && !hasSubmitted){
+      requestAnimationFrame(() => submitToGoogleForm());
+    }
+  });
+  resultsObserver.observe($results, { attributes: true, attributeFilter: ["class"] });
+
+  // Restart should clear the submitted flag so a fresh attempt is sent.
+  document.getElementById("restart-btn").addEventListener("click", () => {
+    hasSubmitted = false;
+  });
+</script>
+</body>
+</html>
